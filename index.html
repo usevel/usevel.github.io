@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>eoka</title>
+<title>usevel</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 :root{
@@ -30,6 +30,10 @@
 html{scroll-behavior:smooth}
 body{background:var(--bg);color:var(--text);font-family:var(--sans);font-size:15px;line-height:1.6;overflow-x:hidden}
 a{color:inherit;text-decoration:none}
+
+/* i18n: show only the active language */
+[data-lang="en"] .t-ru{display:none}
+[data-lang="ru"] .t-en{display:none}
 
 /* noise texture overlay */
 body::before{
@@ -72,7 +76,7 @@ body::before{
 }
 
 .nav-links{display:flex;gap:6px;flex-wrap:wrap}
-.nav-links a{
+.nav-links a,.nav-links button{
   font-family:var(--mono);font-size:11px;
   color:var(--muted);letter-spacing:0.06em;
   padding:6px 12px;
@@ -80,12 +84,14 @@ body::before{
   background:var(--surface);
   transition:all .2s;
   display:inline-block;
+  cursor:pointer;
 }
-.nav-links a:hover{
+.nav-links a:hover,.nav-links button:hover{
   color:var(--text);
   border-color:var(--text);
   transform:translateY(-1px);
 }
+#lang-toggle{font-family:var(--mono)}
 
 /* SECTION */
 .sec{margin-bottom:52px}
@@ -196,48 +202,63 @@ body::before{
   <div class="header">
     <div class="header-top">
       <div class="name-block">
-        <div class="name">eoka <span class="cursor"></span></div>
+        <div class="name">usevel<span class="cursor"></span></div>
       </div>
-      <div class="status-dot"><span class="dot"></span>open to work</div>
+      <div class="status-dot"><span class="dot"></span><span class="t-en">open to work</span><span class="t-ru">в поиске работы</span></div>
     </div>
-    <div class="tagline">Reverse Engineer · Malware Analyst · C++ Developer</div>
+    <div class="tagline"><span class="t-en">C++ Developer</span><span class="t-ru">C++ Разработчик</span></div>
     <div class="nav-links">
-      <a href="https://github.com/eokaaa" target="_blank">github</a>
+      <a href="https://github.com/usevel" target="_blank">github</a>
       <a href="https://t.me/usevle" target="_blank">telegram</a>
       <a href="mailto:eoka.hk.main@gmail.com">email</a>
-      <a href="https://www.linkedin.com/in/eoka-d-3aa255408" target="_blank">linkedin</a>
+      <button id="lang-toggle" type="button" onclick="toggleLang()">RU / EN</button>
     </div>
   </div>
 
   <div class="sec">
-    <div class="sec-label">SKILLS</div>
-    <div class="skill-row"><span class="skill-key">languages</span><span class="skill-val">C++, C, x86-64 ASM</span></div>
-    <div class="skill-row"><span class="skill-key">reversing</span><span class="skill-val">IDA Pro, Ghidra, x64dbg, WinDbg, CFF Explorer, HxD</span></div>
-    <div class="skill-row"><span class="skill-key">malware</span><span class="skill-val">ANY.RUN, VirusTotal, DiE, static &amp; dynamic analysis, IOC</span></div>
-    <div class="skill-row"><span class="skill-key">internals</span><span class="skill-val">WinAPI, PE format, DLL injection, VMT hooking, pattern scanning</span></div>
-    <div class="skill-row"><span class="skill-key">tools</span><span class="skill-val">Cheat Engine, ReClass, Process Hacker, MinHook, ImGui, DirectX 9</span></div>
+    <div class="sec-label"><span class="t-en">SKILLS</span><span class="t-ru">НАВЫКИ</span></div>
+    <div class="skill-row"><span class="skill-key"><span class="t-en">languages</span><span class="t-ru">языки</span></span><span class="skill-val">C++ (17/20), C, x86-64 Assembly (MASM)</span></div>
+    <div class="skill-row"><span class="skill-key">internals</span><span class="skill-val">WinAPI, Nt* API, PE format, manual mapping, VMT/IAT hooking, pattern scanning</span></div>
+    <div class="skill-row"><span class="skill-key"><span class="t-en">rendering</span><span class="t-ru">рендер</span></span><span class="skill-val">ImGui, DirectX 9/11</span></div>
+    <div class="skill-row"><span class="skill-key"><span class="t-en">tooling</span><span class="t-ru">тулинг</span></span><span class="skill-val">IDA Pro, Ghidra, x64dbg, WinDbg, Cheat Engine, ReClass, MinHook, CFF Explorer</span></div>
   </div>
 
   <div class="sec">
-    <div class="sec-label">PROJECTS</div>
+    <div class="sec-label"><span class="t-en">PROJECTS</span><span class="t-ru">ПРОЕКТЫ</span></div>
 
     <div class="project">
       <div class="proj-top">
-        <span class="proj-name">EOHack x64</span>
-        <span class="proj-type">C++ / INTERNAL</span>
+        <span class="proj-name">DLL Injector — Manual Map</span>
+        <span class="proj-type">C++ / TOOL</span>
       </div>
-      <div class="proj-sub">Garry's Mod (x64) internal module</div>
+      <div class="proj-sub"><span class="t-en">Manual-map DLL injector, no LoadLibrary</span><span class="t-ru">Manual map, без LoadLibrary</span></div>
       <div class="proj-desc">
-        Fully reversed and rebuilt from legacy codebase. SDK reconstruction via RE,
-        dynamic pattern scanning (no hardcoded offsets), VMT + trampoline hooks via MinHook,
-        World-to-Screen matrix math, DirectX 9 + ImGui rendering,
-        std::mutex for thread-safe render loop.
+        <span class="t-en">Manual-map DLL injection via Nt* syscalls — no LoadLibrary, no PEB/LDR trace. Relocations, import resolution, TLS callbacks, and execution via thread-hijack shellcode.</span>
+        <span class="t-ru">Ручной маппинг DLL через Nt*-синтаксис — без LoadLibrary и без следа в PEB/LDR. Релокации, разрешение импортов, TLS-коллбэки, запуск через thread-hijack шеллкод.</span>
+      </div>
+      <div class="proj-footer">
+        <div class="proj-tags">
+          <span class="tag">C++20</span><span class="tag">MASM</span><span class="tag">Nt* API</span><span class="tag">Manual Map</span><span class="tag">ImGui</span>
+        </div>
+        <a class="proj-link" href="https://github.com/usevel/injector" target="_blank">github</a>
+      </div>
+    </div>
+
+    <div class="project">
+      <div class="proj-top">
+        <span class="proj-name"><span class="t-en">Runtime Extension Module</span><span class="t-ru">Модуль расширения рантайма</span></span>
+        <span class="proj-type">C++ / RUNTIME</span>
+      </div>
+      <div class="proj-sub"><span class="t-en">x64 module, in production 6+ months</span><span class="t-ru">x64-модуль, полгода в проде</span></div>
+      <div class="proj-desc">
+        <span class="t-en">In active use by a real user base for over 6 months. Originally a legacy fork, fully reversed and rebuilt: SDK reconstruction, dynamic pattern scanning, VMT hooking, DirectX 9 + ImGui rendering.</span>
+        <span class="t-ru">Уже полгода активно используется реальными пользователями. Изначально форк легаси-кода, полностью реверсирован и переписан: реконструкция SDK, динамический pattern scanning, VMT-хуки, рендер на DirectX 9 + ImGui.</span>
       </div>
       <div class="proj-footer">
         <div class="proj-tags">
           <span class="tag">C++</span><span class="tag">DirectX 9</span><span class="tag">MinHook</span><span class="tag">ImGui</span><span class="tag">VMT</span>
         </div>
-        <a class="proj-link" href="https://github.com/eokaaa/EOHack-x64" target="_blank">github</a>
+        <a class="proj-link" href="https://github.com/usevel/EOHack-x64" target="_blank">github</a>
       </div>
     </div>
 
@@ -246,55 +267,23 @@ body::before{
         <span class="proj-name">PE Informer</span>
         <span class="proj-type">C++ / TOOL</span>
       </div>
-      <div class="proj-sub">Lightweight PE analyzer & packer detector</div>
+      <div class="proj-sub"><span class="t-en">Lightweight PE analyzer & packer detector</span><span class="t-ru">Лёгкий PE-анализатор и детектор пакеров</span></div>
       <div class="proj-desc">
-        Custom executable parsing tool. Reads DOS/NT headers, decrypts undocumented MSVC Rich Headers (XOR) for compiler identification, calculates Shannon entropy, and performs heuristic packer detection. Clean DWM dark mode ImGui interface with drag & drop support.
+        <span class="t-en">Custom PE analyzer: header parsing, Rich Header decoding, entropy calculation, and packer detection with an ImGui interface.</span>
+        <span class="t-ru">Свой PE-анализатор: разбор заголовков, декодирование Rich Header, расчёт энтропии и эвристический детект пакеров, интерфейс на ImGui.</span>
       </div>
       <div class="proj-footer">
         <div class="proj-tags">
           <span class="tag">C++</span><span class="tag">WinAPI</span><span class="tag">ImGui</span><span class="tag">PE Format</span>
         </div>
-        <a class="proj-link" href="https://github.com/eokaaa/PE-Informer" target="_blank">github</a>
+        <a class="proj-link" href="https://github.com/usevel/PE-Informer" target="_blank">github</a>
       </div>
     </div>
 
-    <div class="project">
-      <div class="proj-top">
-        <span class="proj-name">Crackme &amp; CTF Write-ups</span>
-        <span class="proj-type">SECURITY RESEARCH</span>
-      </div>
-      <div class="proj-sub">Ongoing — HackTheBox &amp; crackmes.one</div>
-      <div class="proj-desc">
-        Solving and documenting reverse-engineering challenges from beginner keygens up to Very Hard-rated custom VMs. Recent write-ups: reversed a Godot Engine game (HackTheBox "GameLoader") — recovered obfuscated network logic via memory dumping and manual deobfuscation; broke a custom bytecode VM with LCG encryption and anti-debug (HackTheBox "Rega's Town" / crackme_very_hard) by writing a standalone C++ disassembler and bruteforcing the serial. New reports published on an ongoing basis.
-      </div>
-      <div class="proj-footer">
-        <div class="proj-tags">
-          <span class="tag">IDA Pro</span><span class="tag">Custom VM</span><span class="tag">Anti-Debug</span><span class="tag">Godot</span>
-        </div>
-        <a class="proj-link" href="https://github.com/eokaaa/reports" target="_blank">github</a>
-      </div>
-    </div>
-
-    <div class="project">
-      <div class="proj-top">
-        <span class="proj-name">Malware Analysis Reports</span>
-        <span class="proj-type">SECURITY RESEARCH</span>
-      </div>
-      <div class="proj-sub">Ongoing research — MalwareBazaar samples</div>
-      <div class="proj-desc">
-        Static + dynamic. Each report includes behavioral analysis, process tree breakdown, and IOC extraction. Covers obfuscation techniques, sandbox evasion, persistence mechanisms, and C2 communication.
-      </div>
-      <div class="proj-footer">
-        <div class="proj-tags">
-          <span class="tag">IDA Pro</span><span class="tag">ANY.RUN</span><span class="tag">IOC</span><span class="tag">YARA</span>
-        </div>
-        <a class="proj-link" href="https://github.com/eokaaa/malware-analysis" target="_blank">github</a>
-      </div>
-    </div>
   </div>
 
   <div class="sec">
-    <div class="sec-label">CONTACT</div>
+    <div class="sec-label"><span class="t-en">CONTACT</span><span class="t-ru">КОНТАКТЫ</span></div>
     <div class="contact-grid">
       <a class="contact-item" href="mailto:eoka.hk.main@gmail.com">
         <span class="contact-platform">EMAIL</span>
@@ -304,22 +293,30 @@ body::before{
         <span class="contact-platform">TELEGRAM</span>
         <span class="contact-val">@usevle</span>
       </a>
-      <a class="contact-item" href="https://github.com/eokaaa" target="_blank">
+      <a class="contact-item" href="https://github.com/usevel" target="_blank">
         <span class="contact-platform">GITHUB</span>
-        <span class="contact-val">eokaaa</span>
+        <span class="contact-val">usevel</span>
       </a>
       <a class="contact-item" href="https://www.linkedin.com/in/eoka-d-3aa255408" target="_blank">
         <span class="contact-platform">LINKEDIN</span>
-        <span class="contact-val">eoka</span>
+        <span class="contact-val">usevel</span>
       </a>
     </div>
   </div>
 
   <div class="foot">
-    <span class="foot-left">eoka — self-taught, 2026</span>
-    <span class="foot-right"><span class="dot"></span>open to work</span>
+    <span class="foot-left"><span class="t-en">usevel — self-taught, 2026</span><span class="t-ru">usevel — самоучка, 2026</span></span>
+    <span class="foot-right"><span class="dot"></span><span class="t-en">open to work</span><span class="t-ru">в поиске работы</span></span>
   </div>
 
 </div>
+<script>
+function toggleLang(){
+  var html = document.documentElement;
+  var next = html.getAttribute('data-lang') === 'en' ? 'ru' : 'en';
+  html.setAttribute('data-lang', next);
+  html.setAttribute('lang', next);
+}
+</script>
 </body>
-</html> 
+</html>
