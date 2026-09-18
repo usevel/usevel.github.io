@@ -161,7 +161,7 @@ body::before{
 .proj-link::after{content:'↗';font-size:11px}
 
 /* CONTACT */
-.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.contact-grid{display:grid;grid-template-columns:1fr;gap:8px}
 .contact-item{
   padding:14px 16px;
   border:1px solid var(--border);
@@ -217,14 +217,32 @@ body::before{
 
   <div class="sec">
     <div class="sec-label"><span class="t-en">SKILLS</span><span class="t-ru">НАВЫКИ</span></div>
-    <div class="skill-row"><span class="skill-key"><span class="t-en">languages</span><span class="t-ru">языки</span></span><span class="skill-val">C++ (17/20), C, x86-64 Assembly (MASM)</span></div>
+    <div class="skill-row"><span class="skill-key"><span class="t-en">languages</span><span class="t-ru">языки</span></span><span class="skill-val">C++ (17/20/23), C, x86-64 Assembly (MASM)</span></div>
     <div class="skill-row"><span class="skill-key">internals</span><span class="skill-val">WinAPI, Nt* API, PE format, manual mapping, VMT/IAT hooking, pattern scanning</span></div>
-    <div class="skill-row"><span class="skill-key"><span class="t-en">rendering</span><span class="t-ru">рендер</span></span><span class="skill-val">ImGui, DirectX 9/11</span></div>
+    <div class="skill-row"><span class="skill-key"><span class="t-en">gui</span><span class="t-ru">графика</span></span><span class="skill-val">Qt 6 Widgets, ImGui, DirectX 9/11</span></div>
     <div class="skill-row"><span class="skill-key"><span class="t-en">tooling</span><span class="t-ru">тулинг</span></span><span class="skill-val">IDA Pro, Ghidra, x64dbg, WinDbg, Cheat Engine, ReClass, MinHook, CFF Explorer</span></div>
   </div>
 
   <div class="sec">
     <div class="sec-label"><span class="t-en">PROJECTS</span><span class="t-ru">ПРОЕКТЫ</span></div>
+
+    <div class="project">
+      <div class="proj-top">
+        <span class="proj-name">ToPDF</span>
+        <span class="proj-type">C++ / Qt / APP</span>
+      </div>
+      <div class="proj-sub"><span class="t-en">Photo-to-PDF converter, Qt Widgets desktop app</span><span class="t-ru">Конвертер фото в PDF, десктоп-приложение на Qt Widgets</span></div>
+      <div class="proj-desc">
+        <span class="t-en">Drag-and-drop photo import, per-photo rotate/remove, internal drag-and-drop reordering via a custom QMimeData format, and print-quality PDF export (QPdfWriter/QPainter, 300 DPI, aspect-ratio-preserving scaling). Packaged as a standalone Windows installer with bundled Qt runtime.</span>
+        <span class="t-ru">Drag-and-drop импорт фото, поворот/удаление каждого фото по отдельности, внутренний drag-and-drop для смены порядка через кастомный QMimeData-формат, экспорт в печатный PDF (QPdfWriter/QPainter, 300 DPI, масштабирование с сохранением пропорций). Упакован в standalone Windows-инсталлятор со встроенным Qt-рантаймом.</span>
+      </div>
+      <div class="proj-footer">
+        <div class="proj-tags">
+          <span class="tag">C++23</span><span class="tag">Qt 6 Widgets</span><span class="tag">QPdfWriter</span><span class="tag">Drag & Drop</span>
+        </div>
+        <a class="proj-link" href="https://github.com/usevel/ToPDF" target="_blank">github</a>
+      </div>
+    </div>
 
     <div class="project">
       <div class="proj-top">
@@ -295,10 +313,6 @@ body::before{
       </a>
       <a class="contact-item" href="https://github.com/usevel" target="_blank">
         <span class="contact-platform">GITHUB</span>
-        <span class="contact-val">usevel</span>
-      </a>
-      <a class="contact-item" href="https://www.linkedin.com/in/eoka-d-3aa255408" target="_blank">
-        <span class="contact-platform">LINKEDIN</span>
         <span class="contact-val">usevel</span>
       </a>
     </div>
